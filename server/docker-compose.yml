@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  nestapp:
+    container_name: nestapp
+    image: deepak22448/nestjs
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+    build: .
+    ports:
+      - 3001:3001
+    environment:
+      MONGODB_ADMINUSERNAME: root
+      MONGODB_ADMINPASSWORD: example
+      MONGODB_URL: mongodb://root:example@mongo:27017/
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    volumes:
+      - type: volume
+        source: mongodata
+        target: /data/db
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+volumes:
+  mongodata:

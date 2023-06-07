@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  nestapp:
+    container_name: nextapp
+    image: deepak22448/nextjs
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+    build: .
+    ports:
+      - 3000:3000
